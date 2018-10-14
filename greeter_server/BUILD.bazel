@@ -18,3 +18,15 @@ go_binary(
     embed = [":go_default_library"],
     visibility = ["//visibility:public"],
 )
+
+# Docker
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_image(
+    name = "greeter_server_image",
+    embed = [":go_default_library"],
+    importpath = "google.golang.org/grpc/examples/helloworld/greeter_server",
+    goarch = "amd64",
+    goos = "linux",
+    pure = "on",
+)
